@@ -22,7 +22,9 @@ gem 'puma', '~> 5.0'
 # gem "kredis"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
+gem 'bcrypt', '~> 3.1.7'
+
+gem 'jwt'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
@@ -48,7 +50,6 @@ group :development do
 end
 
 group :test do
-  gem 'database_cleaner'
   gem 'factory_bot_rails', '~> 4.0'
   gem 'faker'
   gem 'shoulda-matchers', '~> 3.1'
