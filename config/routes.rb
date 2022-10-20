@@ -5,4 +5,8 @@ Rails.application.routes.draw do
   # root "articles#index"
   post 'login', to: 'authentication#authenticate'
   post 'signup', to: 'users#create'
+
+  resources :users
+  resources :conversations, only: [:index, :show]
+  resources :messages, only: [:create]
 end
