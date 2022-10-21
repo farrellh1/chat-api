@@ -2,7 +2,7 @@ class ConversationsController < ApplicationController
     before_action :set_recipient, only: [:show]
 
     def index
-        conversations = Conversation.where("sender_id = ? OR recipient_id = ?", @current_user.id, @current_user.id).order(updated_at: :desc)
+        conversations = Conversation.show_conversations(@current_user.id)
         conversations.each do |conversation|
             conversation[:last_message] = conversation.messages.last
             conversation[:unread] = unread_messages(conversation, @current_user.id).length
@@ -11,9 +11,9 @@ class ConversationsController < ApplicationController
     end
 
     def show
-        conversation = Conversation.where("(sender_id = ? AND recipient_id = ?) OR (sender_id = ? AND recipient_id = ?)", @current_user.id, @recipient.id, @recipient.id, @current_user.id).first
+        conversation = Conversation.show_messages(@current_user.id, @recipient.id)
         
-        messages = conversation.messages.order(created_at: :desc)
+        messages = conversation.messages
         unread_messages = unread_messages(conversation, @current_user.id)
         unread_messages.update_all(read: true)
 
