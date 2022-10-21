@@ -1,24 +1,13 @@
-# README
+# Happy 5 Challenge Messaging API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Using
+- Ruby v3.1.2
+- Rails v7.0.4
+- PostgreSQL 
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## API Documentation
+https://documenter.getpostman.com/view/17536229/2s847PJV1y
+### How to run test
+1. Install packages using ```bundle install```
+2. Create database and migrate ```rails db:create db:migrate```
+3. Run rspec using ```bundle exec rspec```
