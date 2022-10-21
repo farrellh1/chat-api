@@ -6,6 +6,10 @@ ruby '3.1.2'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.4'
 
+gem "pry-rails"
+
+gem "pry-doc"
+
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
 
@@ -53,4 +57,5 @@ group :test do
   gem 'factory_bot_rails', '~> 4.0'
   gem 'faker'
   gem 'shoulda-matchers', '~> 3.1'
+  gem 'database_cleaner'
 end

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   post 'login', to: 'authentication#authenticate'
   post 'signup', to: 'users#create'
 
-  resources :users
+  # get 'users', to: 'users#index'
   resources :conversations, only: [:index, :show]
   resources :messages, only: [:create]
 end
