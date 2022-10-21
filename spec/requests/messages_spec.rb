@@ -36,4 +36,17 @@ RSpec.describe "Make Conversations", type: :request do
     end
   end
 
+  describe 'Get /contacts' do
+    context 'when users get contacts' do
+      before { get '/contacts', params: {}, headers: headers }
+      it 'returns list of users without user it self' do
+        expect(json).not_to be_empty
+        expect(json.size).to eq(1)
+      end
+
+      it 'returns status code 200' do
+        expect(response).to have_http_status(200)
+      end
+    end
+  end
 end
