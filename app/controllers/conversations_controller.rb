@@ -2,7 +2,7 @@ class ConversationsController < ApplicationController
   before_action :set_recipient, only: [:show]
 
   def index
-    conversations = Conversation.show_conversations(@current_user.id)
+    conversations = Conversation.preload(:messages).show_conversations(@current_user.id)
     conversations.each do |conversation|
       conversation[:last_message] = conversation.messages.last
       conversation[:unread] = unread_messages(conversation, @current_user.id).length
