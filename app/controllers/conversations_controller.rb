@@ -1,32 +1,32 @@
 class ConversationsController < ApplicationController
-    before_action :set_recipient, only: [:show]
+  before_action :set_recipient, only: [:show]
 
-    def index
-        conversations = Conversation.show_conversations(@current_user.id)
-        conversations.each do |conversation|
-            conversation[:last_message] = conversation.messages.last
-            conversation[:unread] = unread_messages(conversation, @current_user.id).length
-        end
-        json_response(conversations)
+  def index
+    conversations = Conversation.show_conversations(@current_user.id)
+    conversations.each do |conversation|
+      conversation[:last_message] = conversation.messages.last
+      conversation[:unread] = unread_messages(conversation, @current_user.id).length
     end
+    json_response(conversations)
+  end
 
-    def show
-        conversation = Conversation.show_messages(@current_user.id, @recipient.id)
-        
-        messages = conversation.messages
-        unread_messages = unread_messages(conversation, @current_user.id)
-        unread_messages.update_all(read: true)
+  def show
+    conversation = Conversation.show_messages(@current_user.id, @recipient.id)
 
-        json_response(messages)
-    end
+    messages = conversation.messages.order(created_at: :desc).page params[:page]
+    unread_messages = unread_messages(conversation, @current_user.id)
+    unread_messages.update_all(read: true)
 
-    private
+    json_response(messages)
+  end
 
-    def set_recipient
-        @recipient = User.find(params[:id])
-    end
+  private
 
-    def unread_messages(conversations, user_id)
-        conversations.messages.where.not(user_id: user_id).where(read: false)
-    end
+  def set_recipient
+    @recipient = User.find(params[:id])
+  end
+
+  def unread_messages(conversations, user_id)
+    conversations.messages.where.not(user_id:).where(read: false)
+  end
 end
